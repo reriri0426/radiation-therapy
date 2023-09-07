@@ -9,6 +9,11 @@
         body {
             background-color: #f0f0f0;
             text-align: center;
+            background-image: url('.jpg'); /* 背景画像のURLを指定 */
+        background-size: cover; /* 画面に合わせて背景画像を調整 */
+        background-blend-mode: overlay; /* 背景画像をオーバーレイするモード */
+        background-attachment: fixed; /* 背景画像を固定 */
+        background-repeat: no-repeat; /
         }
         #game-container {
             display: flex;
@@ -98,13 +103,23 @@
             transform: scaleY(0);
             transition: transform 1s ease-in-out; /* アニメーション効果 */
             z-index: 1;
-        } 
-
+            
+    }
 
     </style>
 </head>
 <body>
     <h1>放射線治療を体験しよう！</h1>
+ <!-- ラジオボタンで2Gyと16Gyを選択 -->
+
+<label for="dose-2Gy">2Gy</label>
+<input type="radio" name="dose" id="dose-2Gy" value="2" onchange="doseChanged()">
+
+<label for="dose-16Gy">16Gy</label>
+<input type="radio" name="dose" id="dose-16Gy" value="16" onchange="doseChanged()">
+
+
+
     <button onclick="shootRadiation(1)">Shoot Up</button>
     <button onclick="shootRadiation(2)">Shoot Down</button>
     <button onclick="shootRadiation(3)">Shoot Left</button>
@@ -128,6 +143,8 @@
         <div class="radiation2" id="radiation-down"></div>
         <div class="radiation3" id="radiation-left"></div>
         <div class="radiation4" id="radiation-right"></div>
+
+
     </div>
 
     <script>
@@ -135,8 +152,17 @@
         let radiationCount2 = 0;
         let radiationCount3 = 0;
         let radiationCount4 = 0;
-        const maxRadiationCount = 8; // 各正常細胞が消える放射線の最大回数
+        let maxRadiationCount = 8; // 各正常細胞が消える放射線の最大回数
         
+        function doseChanged() {
+            const selectedDose = document.querySelector('input[name="dose"]:checked').value;
+            // 選択した線量に応じて最大回数を設定
+            if (selectedDose === "2") {
+                maxRadiationCount = 8; // 2Gyの場合
+            } else if (selectedDose === "16") {
+                maxRadiationCount = 2; // 16Gyの場合
+            }
+        }
         function shootRadiation(direction) {
             // 放射線の要素を取得
             const radiation = document.getElementById(`radiation-up`);
