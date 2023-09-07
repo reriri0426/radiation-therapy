@@ -16,6 +16,7 @@
         background-repeat: no-repeat; /
         }
         #game-container {
+            
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -111,7 +112,14 @@
 <body>
     <h1>放射線治療を体験しよう！</h1>
  <!-- ラジオボタンで2Gyと16Gyを選択 -->
-
+</div>
+<div id="comments">
+    <p style="color: #333; line-height: 1;">
+      <br>線源はＸ線　赤い丸はがん細胞　緑の丸は正常細胞<br>
+      <br>上がお腹側、下が背中側の断面を想定しています<br>
+    </p>
+  </div>
+  
 <label for="dose-2Gy">2Gy</label>
 <input type="radio" name="dose" id="dose-2Gy" value="2" onchange="doseChanged()">
 
@@ -125,8 +133,10 @@
     <button onclick="shootRadiation(3)">Shoot Left</button>
     <button onclick="shootRadiation(4)">Shoot Right</button>
     <button onclick="resetGame()">Reset Game</button>
-    <p>線源はＸ線　赤い丸はがん細胞　緑の丸は正常細胞</p>
+    
+    
     <div id="game-container">
+        
         <!-- 周囲に正常細胞を均等に配置 -->
         <div class="normal-cell cell" style="top: 75px; left: 0;"></div>
         <div class="normal-cell cell" style="top: 0; left: 75px;"></div>
@@ -144,6 +154,7 @@
         <div class="radiation3" id="radiation-left"></div>
         <div class="radiation4" id="radiation-right"></div>
 
+    
 
     </div>
 
